@@ -38,7 +38,7 @@
                 {
                     "type": "git",
                     "url": "https://github.com/surge-synthesizer/surge.git",
-                    "tag": "release_1.7.0"
+                    "tag": "release_1.7.1"
                 },
                 {
                     "type": "patch",
