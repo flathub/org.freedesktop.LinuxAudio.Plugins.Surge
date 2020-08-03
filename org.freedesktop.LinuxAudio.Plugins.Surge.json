@@ -13,21 +13,34 @@
     "modules": [
         {
             "name": "surge",
-            "buildsystem": "simple",
-            "build-commands": [
-                "mkdir ${FLATPAK_DEST}/bin",
-                "ln -sf /usr/bin/python3 ${FLATPAK_DEST}/bin/python",
-                "./build-linux.sh -p lv2 build",
-                "./build-linux.sh -p vst3 build"
+            "buildsystem": "cmake-ninja",
+            "build-options": {
+                "arch": {
+                    "arm": {
+                        "config-opts": [
+                            "-DARM_NATIVE=native"
+                        ]
+                    },
+                    "aarch64": {
+                        "config-opts": [
+                            "-DARM_NATIVE=native"
+                        ]
+                    }
+                }
+            },
+            "no-make-install": true,
+            "make-args": [
+                "Surge-VST3-Packaged",
+                "Surge-LV2-Packaged"
             ],
             "cleanup": [
                 "/bin/python"
             ],
             "post-install": [
                 "install -d $FLATPAK_DEST/lv2/Surge.lv2",
-                "install -t $FLATPAK_DEST/lv2/Surge.lv2 buildlin/surge_products/Surge.lv2/*",
+                "install -t $FLATPAK_DEST/lv2/Surge.lv2 surge_products/Surge.lv2/*",
                 "install -d $FLATPAK_DEST/vst3/Surge.vst3/Contents/${FLATPAK_ARCH}-linux",
-                "install -t $FLATPAK_DEST/vst3/Surge.vst3/Contents/${FLATPAK_ARCH}-linux buildlin/surge_products/Surge.vst3/Contents/${FLATPAK_ARCH}-linux/*.so",
+                "install -t $FLATPAK_DEST/vst3/Surge.vst3/Contents/${FLATPAK_ARCH}-linux surge_products/Surge.vst3/Contents/${FLATPAK_ARCH}-linux/*.so",
                 "install -d $FLATPAK_DEST/share/surge",
                 "cp -a resources/data/* $FLATPAK_DEST/share/surge",
                 "install -Dm644 --target-directory=${FLATPAK_DEST}/share/metainfo org.freedesktop.LinuxAudio.Plugins.Surge.metainfo.xml",
@@ -47,6 +60,13 @@
                 {
                     "type": "file",
                     "path": "org.freedesktop.LinuxAudio.Plugins.Surge.metainfo.xml"
+                },
+                {
+                    "type": "shell",
+                    "commands": [
+                        "mkdir ${FLATPAK_DEST}/bin",
+                        "ln -sf /usr/bin/python3 ${FLATPAK_DEST}/bin/python"
+                    ]
                 }
             ]
         }
