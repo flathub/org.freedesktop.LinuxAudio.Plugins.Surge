@@ -1,4 +1,3 @@
 {
-    "skip-icons-check": true,
-    "skip-arches": ["arm"]
+    "skip-icons-check": true
 }
