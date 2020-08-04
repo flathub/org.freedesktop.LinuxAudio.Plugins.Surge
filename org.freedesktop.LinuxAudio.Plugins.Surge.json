@@ -39,10 +39,12 @@
             "post-install": [
                 "install -d $FLATPAK_DEST/lv2/Surge.lv2",
                 "install -t $FLATPAK_DEST/lv2/Surge.lv2 surge_products/Surge.lv2/*",
-                "install -d $FLATPAK_DEST/vst3/Surge.vst3/Contents/${FLATPAK_ARCH}-linux",
-                "install -t $FLATPAK_DEST/vst3/Surge.vst3/Contents/${FLATPAK_ARCH}-linux surge_products/Surge.vst3/Contents/$(arch)-linux/*.so",
+                "install -d $FLATPAK_DEST/vst3/Surge.vst3/Contents/$(arch)-linux",
+                "install -t $FLATPAK_DEST/vst3/Surge.vst3/Contents/$(arch)-linux surge_products/Surge.vst3/Contents/$(arch)-linux/*.so",
                 "install -d $FLATPAK_DEST/share/surge",
                 "cp -a resources/data/* $FLATPAK_DEST/share/surge",
+                "strip $FLATPAK_DEST/vst3/Surge.vst3/Contents/$(arch)-linux/*.so",
+                "strip $FLATPAK_DEST/lv2/Surge.lv2/*.so",
                 "install -Dm644 --target-directory=${FLATPAK_DEST}/share/metainfo org.freedesktop.LinuxAudio.Plugins.Surge.metainfo.xml",
                 "appstream-compose --basename=org.freedesktop.LinuxAudio.Plugins.Surge --prefix=${FLATPAK_DEST} --origin=flatpak org.freedesktop.LinuxAudio.Plugins.Surge",
                 "install -Dm644 -t $FLATPAK_DEST/share/licenses/surge LICENSE"
