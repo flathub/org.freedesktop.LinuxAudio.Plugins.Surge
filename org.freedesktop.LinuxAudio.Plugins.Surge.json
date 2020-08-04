@@ -58,6 +58,10 @@
                     "path": "surge-fixes.patch"
                 },
                 {
+                    "type": "patch",
+                    "path": "arm-fix.patch"
+                },
+                {
                     "type": "file",
                     "path": "org.freedesktop.LinuxAudio.Plugins.Surge.metainfo.xml"
                 },
