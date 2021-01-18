@@ -28,6 +28,9 @@
                     }
                 }
             },
+            "config-opts": [
+                "-DCMAKE_INSTALL_PREFIX=/app/extensions/Plugins/Surge"
+            ],
             "no-make-install": true,
             "make-args": [
                 "Surge-VST3-Packaged",
@@ -53,15 +56,11 @@
                 {
                     "type": "git",
                     "url": "https://github.com/surge-synthesizer/surge.git",
-                    "tag": "release_1.7.1"
+                    "tag": "release_1.8.0"
                 },
                 {
                     "type": "patch",
                     "path": "surge-fixes.patch"
-                },
-                {
-                    "type": "patch",
-                    "path": "arm-fix.patch"
                 },
                 {
                     "type": "file",
