@@ -1,42 +1,20 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index e9dcad0a..8aa10f9f 100644
+index 365d1a2d..33ae4fac 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -83,7 +83,7 @@ if( CXX_STD_FS )
- else()
-   if( UNIX AND NOT APPLE )
-     set (CMAKE_REQUIRED_FLAGS "-std=c++11")
--    set (CMAKE_REQUIRED_LIBRARIES "stdc++fs")
-+#    set (CMAKE_REQUIRED_LIBRARIES "stdc++fs")
-   endif()
-   CHECK_CXX_SYMBOL_EXISTS(std::experimental::filesystem::path::preferred_separator "experimental/filesystem" CXX_EXP_STD_FS)
-   if( UNIX AND NOT APPLE )
-@@ -459,7 +459,6 @@ elseif( UNIX AND NOT APPLE )
- 
-   set(OS_LINK_LIBRARIES_NOGUI
-     pthread
--    stdc++fs
-     gcc_s
-     gcc
-     dl
-@@ -934,7 +933,6 @@ if( BUILD_HEADLESS )
-     endif()
-     target_link_libraries(surge-headless
-       PRIVATE
--      stdc++fs
-       Threads::Threads
-       )
-   endif()
-diff --git a/src/common/SurgeStorage.cpp b/src/common/SurgeStorage.cpp
-index 7badbc09..5cca5926 100644
---- a/src/common/SurgeStorage.cpp
-+++ b/src/common/SurgeStorage.cpp
-@@ -220,7 +220,7 @@ SurgeStorage::SurgeStorage(std::string suppliedDataPath) : otherscene_clients(0)
-        */
-        if (! fs::is_directory(datapath))
-        {
--          std::string systemDataPath = "/usr/share/surge/";
-+          std::string systemDataPath = "/app/extensions/Plugins/Surge/share/surge/";
-           if ( fs::is_directory(systemDataPath) )
-              datapath = systemDataPath;
-           else
+@@ -126,6 +126,7 @@ target_link_libraries(surge-shared PUBLIC
+ execute_process(
+   WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+   COMMAND ${CMAKE_COMMAND} -D PROJECT_VERSION_MAJOR=${PROJECT_VERSION_MAJOR}  -D PROJECT_VERSION_MINOR=${PROJECT_VERSION_MINOR}
++                           -D CMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
+                            -D SURGESRC=${CMAKE_SOURCE_DIR} -D SURGEBLD=${CMAKE_BINARY_DIR}
+                            -D AZURE_PIPELINE=${AZURE_PIPELINE}
+                            -D WIN32=${WIN32}
+@@ -134,6 +135,7 @@ execute_process(
+ add_custom_target( git-info BYPRODUCTS ${CMAKE_BINARY_DIR}/geninclude/version.cpp
+   WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+   COMMAND ${CMAKE_COMMAND} -D PROJECT_VERSION_MAJOR=${PROJECT_VERSION_MAJOR}  -D PROJECT_VERSION_MINOR=${PROJECT_VERSION_MINOR}
++                           -D CMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
+                            -D SURGESRC=${CMAKE_SOURCE_DIR} -D SURGEBLD=${CMAKE_BINARY_DIR}
+                            -D AZURE_PIPELINE=${AZURE_PIPELINE}
+                            -D WIN32=${WIN32}
