@@ -1,11 +1,10 @@
 {
     "id": "org.freedesktop.LinuxAudio.Plugins.Surge",
-    "branch": "23.08",
+    "branch": "24.08",
     "runtime": "org.freedesktop.LinuxAudio.BaseExtension",
     "runtime-version": "stable",
-    "sdk": "org.freedesktop.Sdk//23.08",
+    "sdk": "org.freedesktop.Sdk//24.08",
     "build-extension": true,
-    "appstream-compose": false,
     "build-options": {
         "prefix": "/app/extensions/Plugins/Surge",
         "prepend-path": "/app/extensions/Plugins/Surge/bin"
@@ -49,7 +48,6 @@
                 "strip $FLATPAK_DEST/vst3/Surge.vst3/Contents/$(arch)-linux/*.so",
                 "strip $FLATPAK_DEST/lv2/Surge.lv2/*.so",
                 "install -Dm644 --target-directory=${FLATPAK_DEST}/share/metainfo org.freedesktop.LinuxAudio.Plugins.Surge.metainfo.xml",
-                "appstream-compose --basename=org.freedesktop.LinuxAudio.Plugins.Surge --prefix=${FLATPAK_DEST} --origin=flatpak org.freedesktop.LinuxAudio.Plugins.Surge",
                 "install -Dm644 -t $FLATPAK_DEST/share/licenses/surge LICENSE"
             ],
             "sources": [
