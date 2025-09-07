@@ -18,3 +18,23 @@ index 365d1a2d..33ae4fac 100644
                             -D SURGESRC=${CMAKE_SOURCE_DIR} -D SURGEBLD=${CMAKE_BINARY_DIR}
                             -D AZURE_PIPELINE=${AZURE_PIPELINE}
                             -D WIN32=${WIN32}
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 4ad951d..51f2591 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -544,6 +544,7 @@ elseif( UNIX AND NOT APPLE )
+   endif()
+   pkg_check_modules(CAIRO REQUIRED cairo)
+   pkg_check_modules(FONTCONFIG REQUIRED fontconfig)
++  pkg_check_modules(FREETYPE REQUIRED freetype2)
+   pkg_check_modules(X11 REQUIRED x11)
+   pkg_check_modules(XCB REQUIRED xcb)
+   pkg_check_modules(XCBCURSOR REQUIRED xcb-cursor)
+@@ -593,6 +594,7 @@ elseif( UNIX AND NOT APPLE )
+     ${OS_LINK_LIBRARIES_NOGUI}
+     ${CAIRO_LDFLAGS}
+     ${FONTCONFIG_LDFLAGS}
++    ${FREETYPE_LDFLAGS}
+     ${X11_LDFLAGS}
+     ${XCB_LDFLAGS}
+     ${XCBCURSOR_LDFLAGS}

@@ -1,9 +1,9 @@
 {
     "id": "org.freedesktop.LinuxAudio.Plugins.Surge",
-    "branch": "24.08",
+    "branch": "25.08",
     "runtime": "org.freedesktop.LinuxAudio.BaseExtension",
     "runtime-version": "stable",
-    "sdk": "org.freedesktop.Sdk//24.08",
+    "sdk": "org.freedesktop.Sdk//25.08",
     "build-extension": true,
     "build-options": {
         "prefix": "/app/extensions/Plugins/Surge",
@@ -14,12 +14,9 @@
             "name": "surge",
             "buildsystem": "cmake-ninja",
             "build-options": {
+                "cxxflags": "-std=c++14 -Wno-error=deprecated-declarations",
+                "ldflags": "-z noexecstack",
                 "arch": {
-                    "arm": {
-                        "config-opts": [
-                            "-DARM_NATIVE=native"
-                        ]
-                    },
                     "aarch64": {
                         "config-opts": [
                             "-DARM_NATIVE=native"
@@ -28,7 +25,7 @@
                 }
             },
             "config-opts": [
-                "-DCMAKE_INSTALL_PREFIX=/app/extensions/Plugins/Surge"
+                "-DCMAKE_POLICY_VERSION_MINIMUM=3.5"
             ],
             "no-make-install": true,
             "make-args": [
@@ -47,7 +44,7 @@
                 "cp -a resources/data/* $FLATPAK_DEST/share/surge",
                 "strip $FLATPAK_DEST/vst3/Surge.vst3/Contents/$(arch)-linux/*.so",
                 "strip $FLATPAK_DEST/lv2/Surge.lv2/*.so",
-                "install -Dm644 --target-directory=${FLATPAK_DEST}/share/metainfo org.freedesktop.LinuxAudio.Plugins.Surge.metainfo.xml",
+                "install -Dm644 -t ${FLATPAK_DEST}/share/metainfo org.freedesktop.LinuxAudio.Plugins.Surge.metainfo.xml",
                 "install -Dm644 -t $FLATPAK_DEST/share/licenses/surge LICENSE"
             ],
             "sources": [
