@@ -1,9 +1,9 @@
 {
     "id": "org.freedesktop.LinuxAudio.Plugins.Surge",
-    "branch": "25.08",
+    "branch": "26.08",
     "runtime": "org.freedesktop.LinuxAudio.BaseExtension",
     "runtime-version": "stable",
-    "sdk": "org.freedesktop.Sdk//25.08",
+    "sdk": "org.freedesktop.Sdk//26.08",
     "build-extension": true,
     "build-options": {
         "prefix": "/app/extensions/Plugins/Surge",
@@ -51,6 +51,7 @@
                 {
                     "type": "git",
                     "url": "https://github.com/surge-synthesizer/surge.git",
+                    "commit": "91069f8d0c0269e962fa3b5f932b4511aa07e451",
                     "tag": "release_1.9.0"
                 },
                 {
